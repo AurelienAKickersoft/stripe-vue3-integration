@@ -17,7 +17,8 @@ import { loadStripe } from '@stripe/stripe-js';
 
 export default {
   setup() {
-    const stripePromise = loadStripe(process.env.STRIPE_PUBLIC_KEY);
+    console.log(import.meta.env)
+    const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLIC_KEY);
     const stripe = ref(null);
     const elements = ref(null);
     const paymentElement = ref(null);
@@ -30,7 +31,7 @@ export default {
       paymentElement.value = elements.value.create('card' );
       paymentElement.value.mount('#payment-element');
 
-      const {clientSecret, error} = await fetch(`${process.env.BACKEND_URL}/payment/intent`, {
+      const {clientSecret, error} = await fetch(`${import.meta.env.VITE_BACKEND_URL}/payment/intent`, {
         method: 'POST',
         headers:{
           'Content-Type': 'application/json'
