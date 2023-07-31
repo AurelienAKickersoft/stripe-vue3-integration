@@ -30,7 +30,7 @@ export default {
       paymentElement.value = elements.value.create('card' );
       paymentElement.value.mount('#payment-element');
 
-      const {clientSecret, error} = await fetch('http://127.0.0.1:80/payment/intent', {
+      const {clientSecret, error} = await fetch(`${process.env.BACKEND_URL}/payment/intent`, {
         method: 'POST',
         headers:{
           'Content-Type': 'application/json'
